@@ -676,10 +676,23 @@ class StGitDoc {
         }
     }
     focusWindow() {
-        window.showTextDocument(this.doc, {
-            preview: false,
-            viewColumn: this.getConfiguredViewColumn(),
-        });
+        const existingEditor = window.visibleTextEditors.find(
+            editor => editor.document === this.doc);
+
+        if (existingEditor) {
+            // Focus on existing buffer
+            window.showTextDocument(this.doc, {
+                preview: false,
+                viewColumn: existingEditor.viewColumn,
+                preserveFocus: false
+            });
+        } else {
+            // Open new buffer
+            window.showTextDocument(this.doc, {
+                preview: false,
+                viewColumn: this.getConfiguredViewColumn(),
+            });
+        }
     }
     async closeAllDiffEditors() {
         const editors = window.visibleTextEditors.filter(
@@ -1165,6 +1178,16 @@ class StGitDoc {
     }
 
     private async openInitialEditor() {
+        // Close any existing editors of this document first to prevent vscode
+        // from remembering the previous location
+        const existingEditors = window.visibleTextEditors.filter(
+            editor => editor.document.uri.toString() === this.doc.uri.toString()
+        );
+        for (const editor of existingEditors) {
+            await vscode.commands.executeCommand(
+                'workbench.action.closeActiveEditor');
+        }
+
         const editor = await window.showTextDocument(this.doc, {
             viewColumn: this.getConfiguredViewColumn(),
             preview: false,
@@ -1391,7 +1414,11 @@ class StGitMode {
         this.historyDecoration.dispose();
     }
     private async openStgit() {
-        if (this.stgit) {
+        const stgitBufferVisible = this.stgit &&
+            window.visibleTextEditors.some(
+                editor => editor.document === this.stgit?.doc);
+
+        if (this.stgit && stgitBufferVisible) {
             const scheme = window.activeTextEditor?.document.uri.scheme || "";
             const isInStgitBuffer = ['stgit', 'stgit-diff'].includes(scheme);
             if (!isInStgitBuffer) {
@@ -1405,6 +1432,11 @@ class StGitMode {
             this.stgit.focusWindow();
             this.stgit.reload();
         } else {
+            if (this.stgit) {
+                this.stgit.dispose();
+                this.stgit = null;
+            }
+
             const repo = await RepositoryInfo.lookup();
             if (!repo) {
                 info("Failed to find a GIT repository");
