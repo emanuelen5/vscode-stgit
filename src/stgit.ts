@@ -372,6 +372,15 @@ class StGitDoc {
         this.reload();
         this.openInitialEditor();
     }
+    private getConfiguredViewColumn(): vscode.ViewColumn {
+        const config = getStGitConfig();
+        return ({
+            main: vscode.ViewColumn.One,
+            side: vscode.ViewColumn.Two,
+            beside: vscode.ViewColumn.Beside,
+            auto: this.mainViewColumn,
+        })[config.openLocation];
+    }
     dispose() {
         this.subscriptions.forEach(s => s.dispose());
     }
@@ -669,7 +678,7 @@ class StGitDoc {
     focusWindow() {
         window.showTextDocument(this.doc, {
             preview: false,
-            viewColumn: this.mainViewColumn,
+            viewColumn: this.getConfiguredViewColumn(),
         });
     }
     async closeAllDiffEditors() {
@@ -1157,7 +1166,7 @@ class StGitDoc {
 
     private async openInitialEditor() {
         const editor = await window.showTextDocument(this.doc, {
-            viewColumn: this.mainViewColumn,
+            viewColumn: this.getConfiguredViewColumn(),
             preview: false,
         });
         const opts = editor.options;

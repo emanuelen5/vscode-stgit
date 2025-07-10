@@ -12,6 +12,7 @@ class StGitConfig {
     gitExecutable = "git";
     stgitExecutable = "stg";
     showUnknownFiles = false;
+    openLocation: 'auto' | 'main' | 'side' | 'beside' = 'auto';
 
     private readonly configChanged = new vscode.EventEmitter<void>();
 
@@ -41,6 +42,7 @@ class StGitConfig {
         this.gitExecutable = config.get('gitExecutable') ?? "git";
         this.stgitExecutable = config.get('stgitExecutable') ?? "stg";
         this.showUnknownFiles = config.get('showUnknownFiles', false);
+        this.openLocation = config.get('openLocation', 'auto');
     }
 
     private trackStGitVersion() {

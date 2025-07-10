@@ -37,6 +37,18 @@
                     "type": "string",
                     "default": "git",
                     "description": "Path to Git binary (git)"
+                },
+                "stgit.openLocation": {
+                    "type": "string",
+                    "enum": ["auto", "main", "side", "beside"],
+                    "enumDescriptions": [
+                        "Open in the current window or main editor (default behavior)",
+                        "Open in the first tab group",
+                        "Open in the second tab group",
+                        "Open in a new tab group beside the current editor"
+                    ],
+                    "default": "auto",
+                    "description": "Placement of the StGit buffer"
                 }
             }
         },
