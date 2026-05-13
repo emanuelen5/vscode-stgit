@@ -5,6 +5,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 -->
 
 ## 0.9.11 (unreleased)
+- Add support for navigating into/out of submodules with "Enter" and "-" keys.
+- Let the user switch branch when only submodules are changed.
 
 ## 0.9.10 (2025-07-12)
 - Improve switching between workspaces
