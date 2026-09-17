@@ -5,6 +5,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 -->
 
 ## 0.9.11 (unreleased)
+- Add a command for copying the commit SHA of the selected patch
 
 ## 0.9.10 (2025-07-12)
 - Improve switching between workspaces
