@@ -233,7 +233,7 @@
         }, {
             "command": "stgit.redo",
             "category": "StGit",
-            "title": "Undo Recent Undo"
+            "title": "Redo Operation"
         }, {
             "command": "stgit.refresh",
             "category": "StGit",
