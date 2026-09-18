@@ -5,6 +5,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 -->
 
 ## 0.9.11 (unreleased)
+- Show ellipses after commit titles that have a non-empty message body
 
 ## 0.9.10 (2025-07-12)
 - Improve switching between workspaces
