@@ -16,7 +16,7 @@
 		},
 		"history": {
 			"patterns": [{
-				"begin": "^  (?=[^ ])",
+				"begin": "^[0-9a-f]{7}   (?=[^ ])",
 				"end": "$",
 				"contentName": "string.regexp history.stgit"
 			}, {
@@ -26,7 +26,7 @@
 		"outer": {
 			"patterns": [{
 				"begin": "^Branch",
-				"while": "(?=^(  |$))",
+				"while": "(?=^([0-9a-f]{7}   |  |$))",
 				"patterns": [{ "include": "#history" }]
 			}, {
 				"begin": "^[+][* ]",

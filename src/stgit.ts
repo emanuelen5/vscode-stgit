@@ -290,6 +290,11 @@ class History extends Patch {
         super(description, "", 'H', false);
         this.sha = sha;
     }
+    getLines(): string[] {
+        const lines = super.getLines();
+        lines[0] = `${this.sha.slice(0, 7)} ${lines[0]}`;
+        return lines;
+    }
     protected async doFetchDetails(): Promise<void> {
         const tree = await run('git', ['diff-tree',
             ...RENAMEOPTS, '-z', '--no-commit-id', '-r', this.sha]);
