@@ -13,6 +13,8 @@ as desired.
 
 The extension also provides an Emacs-like diff mode, which among other things allows individual hunks to be applied, staged or split into smaller hunks.
 
+While the StGit window is open, it follows the repository of the active file, including files in submodules.
+
 ![StGit](images/example.png)
 
 > Hint: To enter StGit, press `Ctrl-C Ctrl-I` or run the "`StGit: Open...`"
@@ -22,6 +24,13 @@ operations.
 ## Requirements
 
 This extension requires StGit to be installed (the executable is called `stg`). The tool is available in most distributions (e.g. through "`brew install stgit`" on macOS). It can also be downloaded from GitHub [here](https://stacked-git.github.io).
+
+## Git History Format
+
+Git history entries use the effective `format.pretty` Git configuration. Custom
+`format:` and `tformat:` values and named `pretty.<name>` aliases are supported.
+Multiline output is flattened to one line, and terminal colors are omitted. If
+no reusable one-line format is configured, the extension uses `%h   %s`.
 
 <!--
 ## Extension Settings

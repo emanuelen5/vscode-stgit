@@ -18,6 +18,11 @@
     "publisher": "samuelrydh",
     "icon": "images/icon.png",
     "contributes": {
+        "configurationDefaults": {
+            "[stgit.buffer]": {
+                "editor.folding": false
+            }
+        },
         "configuration": {
             "title": "StGit",
             "properties": {
@@ -85,6 +90,10 @@
             "command": "stgit.editCommitMessage",
             "category": "StGit",
             "title": "Edit Commit Message"
+        }, {
+            "command": "stgit.copyCommitSha",
+            "category": "StGit",
+            "title": "Copy Full Commit SHA"
         }, {
             "command": "stgit.squashPatches",
             "category": "StGit",
@@ -233,7 +242,11 @@
         }, {
             "command": "stgit.redo",
             "category": "StGit",
-            "title": "Undo Recent Undo"
+            "title": "Redo Operation"
+        }, {
+            "command": "stgit.navigateToParent",
+            "category": "StGit",
+            "title": "Navigate to Parent Repository (from submodule)"
         }, {
             "command": "stgit.refresh",
             "category": "StGit",
@@ -410,6 +423,10 @@
         }, {
             "key": "enter",
             "command": "stgit.toggleExpand",
+            "when": "resourceScheme == stgit && editorTextFocus && !commentEditorFocused"
+        }, {
+            "key": "-",
+            "command": "stgit.navigateToParent",
             "when": "resourceScheme == stgit && editorTextFocus && !commentEditorFocused"
         }, {
             "key": "t",

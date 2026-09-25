@@ -5,6 +5,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 -->
 
 ## 0.9.11 (unreleased)
+- Add support for navigating into/out of submodules with "Enter" and "-" keys.
+- Let the user switch branch when only submodules are changed.
+- Rename "StGit: Undo recent undo" command to "StGit: Redo Operation" to align with the stgit CLI
+- Add a command for copying the commit SHA of the selected patch
+- Show ellipses after commit titles that have a non-empty message body
 
 ## 0.9.10 (2025-07-12)
 - Improve switching between workspaces
